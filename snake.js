@@ -1,5 +1,3 @@
-
-
 //board
 var blockSize = 25;
 var rows = 20;
@@ -20,7 +18,7 @@ var foodX;
 var foodY;
 
 var gameOver = false;
-
+var playAgain;
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -68,13 +66,29 @@ function updateBoard(){
     //lose conditions
     if(snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize){
         gameOver == true;
-        alert("Game Over; You Lose");
+        playAgain = confirm("Game Over; You Lose. Would you like to play again?");
+
+        if(playAgain == true){
+            location.reload()
+        }
+        if(playAgain == false){
+            window.close();
+        }
+
     }
 
     for(let i = 0; i < snakeBody.length; i++){
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true;
-            alert("Game Over; You Lose");
+            playAgain = confirm("Game Over; You Lose. Would you like to play again?");
+            
+            if(playAgain == true){
+                location.reload()
+            }
+            
+            if(playAgain == false){
+                window.close();
+            }
         }
     }
 }
