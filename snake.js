@@ -69,7 +69,7 @@ function updateBoard(){
         playAgain = confirm("Game Over; You Lose. Would you like to play again?");
 
         if(playAgain == true){
-            location.reload()
+            document.location = "index.html";
         }
         if(playAgain == false){
             window.close();
@@ -85,7 +85,7 @@ function updateBoard(){
             if(playAgain == true){
                 location.reload()
             }
-            
+
             if(playAgain == false){
                 window.close();
             }
