@@ -69,7 +69,8 @@ function updateBoard(){
         playAgain = confirm("Game Over; You Lose. Would you like to play again?");
 
         if(playAgain == true){
-            document.location = "index.html";
+            alert("Reloading Page");
+            location.reload();
         }
         if(playAgain == false){
             window.close();
