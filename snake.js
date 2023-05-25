@@ -45,6 +45,13 @@ function updateBoard(){
         placeFood();
     }
 
+    for(let i = snakeBody.length - 1; i > 0; i--){
+        snakeBody[i] = snakeBody[i-1];
+    }
+    if(snakeBody.length){
+        snakeBody[0] = [snakeX, snakeY];
+    }
+
     context.fillStyle="lime";
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
