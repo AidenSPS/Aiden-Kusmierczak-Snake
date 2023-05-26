@@ -122,7 +122,9 @@ function updateScore(){
             var newHighScore = confirm("Congradulations, you attained a new high score of "+highScore+". Would you like to save your score?");
             if(newHighScore == true){
                 localStorage.setItem(highScore);
+                console.log("highScore set in localStorage");
                 highScoreDisplay.innerText = "High Score: "+highScore;
+                console.log("added string to the element");
                 playAgain();
             }
             else{
