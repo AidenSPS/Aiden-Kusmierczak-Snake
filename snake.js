@@ -1,3 +1,9 @@
+//Scores
+var currentScore = 0;
+var endScore = 0;
+var scoreDisplay = document.getElementById("currentScore");
+var highScore = 0;
+var highScoreDisplay = document.getElementById("highScore");
 
 //board
 var blockSize = 25;
@@ -47,6 +53,8 @@ function update() {
     if (snakeX == foodX && snakeY == foodY) {
         snakeBody.push([foodX, foodY]);
         placeFood();
+        currentScore++
+        updateScore();
     }
 
     for (let i = snakeBody.length-1; i > 0; i--) {
@@ -102,4 +110,42 @@ function placeFood() {
     //(0-1) * cols -> (0-19.9999) -> (0-19) * 25
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
+}
+
+function updateScore(){
+    if(gameOver == false){
+        scoreDisplay.innerHTML = "Current Score: "+currentScore;
+    }
+    if (gameOver == true){
+        if(highScore < currentScore){
+            highScore = currentScore;
+            var newHighScore = confirm("Congradulations, you attained a new high score of "+highScore+". Would you like to save your score?");
+        }
+        else{
+            currentScore = currentScore;
+            playAgain();
+        }
+        if(newHighScore == true){
+            localStorage.setItem(highScore);
+            playAgain();
+        }
+        else{
+            playAgain();
+        }
+    }
+    
+}
+
+function playAgain(){
+    var playAgain = prompt("Your Current Score is "+currentScore+". Would you like to play again? Type y for Yes and n for no");
+    if(playAgain == "y"){
+        location.reload();
+    }
+    else if(playAgain == "n"){
+        alert("Thank You for playing. For more, see https://github.com/AidenSPS for more games and applications");
+        window.close();
+    }
+    else{
+        alert("Please choose y or n to confirm");
+    }
 }
