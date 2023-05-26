@@ -75,13 +75,13 @@ function update() {
     //game over conditions
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize) {
         gameOver = true;
-        alert("Game Over. Refresh to start new");
+        updateScore();
     }
 
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
-            alert("Game Over. Refresh to start new");
+            updateScore();
         }
     }
 }
@@ -114,22 +114,23 @@ function placeFood() {
 
 function updateScore(){
     if(gameOver == false){
-        scoreDisplay.innerHTML = "Current Score: "+currentScore;
+        scoreDisplay.innerText = "Current Score: "+currentScore;
     }
     if (gameOver == true){
         if(highScore < currentScore){
             highScore = currentScore;
             var newHighScore = confirm("Congradulations, you attained a new high score of "+highScore+". Would you like to save your score?");
+            if(newHighScore == true){
+                localStorage.setItem(highScore);
+                highScoreDisplay.innerText = "High Score: "+highScore;
+                playAgain();
+            }
+            else{
+                playAgain();
+            }
         }
         else{
             currentScore = currentScore;
-            playAgain();
-        }
-        if(newHighScore == true){
-            localStorage.setItem(highScore);
-            playAgain();
-        }
-        else{
             playAgain();
         }
     }
